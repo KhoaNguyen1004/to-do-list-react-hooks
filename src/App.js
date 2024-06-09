@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useNotes } from "./NotesContext";
+import NoteCard from "./components/NoteCard";
+import NoteForm from "./components/NoteForm";
+import Statistics from "./components/Statistics";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="form-container">
+        <NoteForm />
+        <Statistics />
+      </div>
+      <div className="notes-list">
+        <NoteCards />
+      </div>
     </div>
   );
-}
+};
+
+const NoteCards = () => {
+  const { notes } = useNotes();
+
+  return (
+    <div className="notes-grid">
+      {notes.map((note, index) => (
+        <NoteCard key={index} note={note} index={index} />
+      ))}
+    </div>
+  );
+};
 
 export default App;
