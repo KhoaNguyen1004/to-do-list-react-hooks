@@ -1,5 +1,5 @@
 import React from "react";
-import { useNotes } from "../NotesContext";
+import { useNotes } from "../context/NotesContext";
 
 const Statistics = () => {
   const { notes } = useNotes();

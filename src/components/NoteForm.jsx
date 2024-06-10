@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { useNotes } from "../NotesContext";
+import { useNotes } from "../context/NotesContext";
+
+console.log("New run");
 
 const NoteForm = () => {
   const [name, setName] = useState("");
@@ -15,20 +17,21 @@ const NoteForm = () => {
       setAge("");
       setNote("");
     }
+    console.log(e);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>Name</label>
+        <label>Name: </label>
         <input value={name} onChange={(e) => setName(e.target.value)} />
       </div>
       <div>
-        <label>Age</label>
+        <label>Age: </label>
         <input value={age} onChange={(e) => setAge(e.target.value)} />
       </div>
       <div>
-        <label>Note</label>
+        <label>Note: </label>
         <textarea value={note} onChange={(e) => setNote(e.target.value)} />
       </div>
       <button type="submit">Add</button>

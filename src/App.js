@@ -1,5 +1,5 @@
 import React from "react";
-import { useNotes } from "./NotesContext";
+import { useNotes } from "./context/NotesContext";
 import NoteCard from "./components/NoteCard";
 import NoteForm from "./components/NoteForm";
 import Statistics from "./components/Statistics";
