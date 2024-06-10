@@ -1,38 +1,48 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { useNotes } from "../context/NotesContext";
 
 console.log("New run");
 
 const NoteForm = () => {
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [note, setNote] = useState("");
+  const nameRef = useRef();
+  const ageRef = useRef();
+  const noteRef = useRef();
   const { addNote } = useNotes();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name && age && note) {
-      addNote({ name, age: parseInt(age), note });
-      setName("");
-      setAge("");
-      setNote("");
-    }
-    console.log(e);
+    // Set value properties for new note
+    const name = nameRef.current.value;
+    const age = ageRef.current.value;
+    const note = noteRef.current.value;
+
+    const newNote = {
+      name: name,
+      age: age,
+      note: note,
+    };
+
+    addNote(newNote);
+
+    // Reset form
+    nameRef.current.value = "";
+    ageRef.current.value = "";
+    noteRef.current.value = "";
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <label>Name: </label>
-        <input value={name} onChange={(e) => setName(e.target.value)} />
+        <input type="text" ref={nameRef} />
       </div>
       <div>
         <label>Age: </label>
-        <input value={age} onChange={(e) => setAge(e.target.value)} />
+        <input type="number" ref={ageRef} />
       </div>
       <div>
         <label>Note: </label>
-        <textarea value={note} onChange={(e) => setNote(e.target.value)} />
+        <textarea ref={noteRef} />
       </div>
       <button type="submit">Add</button>
     </form>
